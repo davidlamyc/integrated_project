@@ -39,3 +39,8 @@ resource "azurerm_linux_web_app" "core-awa" {
 
   https_only = true
 }
+
+# Output the API URL
+output "api_url" {
+  value = "https://${azurerm_linux_web_app.core-awa.default_hostname}"
+}
