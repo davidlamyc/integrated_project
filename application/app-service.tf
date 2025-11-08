@@ -21,6 +21,8 @@ resource "azurerm_linux_web_app" "core-awa" {
     application_stack {
       python_version = "3.11"  # Or your required version
     }
+
+    app_command_line = "python -m uvicorn main:app --host 0.0.0.0 --port 8000"
     
     # Optional: Configure CORS if needed
     cors {
@@ -32,7 +34,25 @@ resource "azurerm_linux_web_app" "core-awa" {
   app_settings = {
     "SCM_DO_BUILD_DURING_DEPLOYMENT" = "true"
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+    "ENABLE_ORYX_BUILD"              = "true"
   }
+
+  logs {
+    detailed_error_messages = true
+    failed_request_tracing  = true
+    
+    application_logs {
+      file_system_level = "Verbose"  # Options: Off, Error, Warning, Information, Verbose
+    }
+    
+    http_logs {
+      file_system {
+        retention_in_days = 7
+        retention_in_mb   = 35
+      }
+    }
+  }
+
 
   # Enable VNet Integration
   virtual_network_subnet_id = data.azurerm_subnet.core_app1.id

@@ -7,8 +7,7 @@ const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const API_URL =
-  // import.meta.env.VITE_API_URL ||
-  'http://localhost:8000';
+  process.env.REACT_APP_API_URL || 'https://core-awa.azurewebsites.net';
 
 function App() {
   const [todos, setTodos] = useState([]);
