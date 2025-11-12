@@ -5,7 +5,7 @@ export ARM_CLIENT_SECRET="<YOUR_CLIENT_SECRET>"
 export ARM_TENANT_ID="<YOUR_TENANT_ID>"
 export ARM_SUBSCRIPTION_ID="<YOUR_SUBSCRIPTION_ID>"
 ```
-2. In each of the infra layers run `./terraform init`, `./terraform plan -out="main.tfplan`, `./terraform apply "main.tfplan"`
+2. In each of the infra layers run `./terraform init`, `./terraform plan -out="main.tfplan`, `./terraform plan -out="main.tfplan"`
 3. Create a principal and get the credentials (should be skippable)
 ```
 az ad sp create-for-rbac --name "github-actions-deployer" --role contributor --scopes /subscriptions/<subscription-id>/resourceGroups/rg-hubspoke-network --sdk-auth
